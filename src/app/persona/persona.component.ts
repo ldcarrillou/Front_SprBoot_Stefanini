@@ -32,6 +32,8 @@ export class PersonaComponent implements OnInit {
     this.router.navigate(['/createPersonaComponent']);
   }
   public delete(persona: PersonaModel): void {
-    this.personaService.delete(persona);
+    if(confirm("¿Está seguro de borrar el registro?")) {
+      this.personaService.delete(persona);
+    }
   }
 }

@@ -23,6 +23,7 @@ export class PersonaService {
   }*/
   public delete(persona: PersonaModel): void {
     this.http.post("http://localhost:8080/deletePersona", JSON.stringify(persona)).subscribe();
+    location.reload();
     this.getPersonas();
   }
 }
