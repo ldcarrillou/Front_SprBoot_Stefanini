@@ -1,7 +1,8 @@
-import { PersonaModel } from './../model/persona.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { PersonaModel } from './../model/persona.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,8 @@ export class PersonaService {
     }
     /*return this.personas;
   }*/
+  public delete(persona: PersonaModel): void {
+    this.http.post("http://localhost:8080/deletePersona", JSON.stringify(persona)).subscribe();
+    this.getPersonas();
+  }
 }

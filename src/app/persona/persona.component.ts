@@ -1,6 +1,7 @@
-import { PersonaModel } from './../model/persona.model';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { PersonaModel } from './../model/persona.model';
 import { PersonaService } from './persona.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { PersonaService } from './persona.service';
 export class PersonaComponent implements OnInit {
 
   public personas: Array<PersonaModel>;
-  constructor(private personaService: PersonaService) { }
+  constructor(private personaService: PersonaService, private router: Router) { }
 
   ngOnInit() {
     this.loadPersonas();
@@ -24,5 +25,13 @@ export class PersonaComponent implements OnInit {
       this.personas = res;
       console.log(res);
     });
+  }
+
+  public edit(persona: PersonaModel): void {
+    sessionStorage.setItem('persona', JSON.stringify(persona));
+    this.router.navigate(['/createPersonaComponent']);
+  }
+  public delete(persona: PersonaModel): void {
+    this.personaService.delete(persona);
   }
 }

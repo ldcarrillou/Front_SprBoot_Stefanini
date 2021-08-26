@@ -19,7 +19,12 @@ export class CreatePersonaComponent implements OnInit {
 
   constructor(private createPersonaService: CreatePersonaService,
     private router: Router) {
-    this.persona = new PersonaModel();
+
+      if(sessionStorage.getItem("persona")) {
+        this.persona = JSON.parse(sessionStorage.getItem("persona") || '{}');
+      } else {
+        this.persona = new PersonaModel();
+      }
   }
 
   ngOnInit(): void {
@@ -40,6 +45,7 @@ export class CreatePersonaComponent implements OnInit {
     } else {
       this.message = "Los campos con * son obligatorios";
     }
+    sessionStorage.clear();
   }
 
 }
