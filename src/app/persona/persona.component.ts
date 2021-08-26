@@ -1,3 +1,4 @@
+import { PersonaModel } from './../model/persona.model';
 import { Component, OnInit } from '@angular/core';
 
 import { PersonaService } from './persona.service';
@@ -10,9 +11,18 @@ import { PersonaService } from './persona.service';
 })
 export class PersonaComponent implements OnInit {
 
+  public personas: Array<PersonaModel>;
   constructor(private personaService: PersonaService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.loadPersonas();
   }
 
+  private loadPersonas(): void {
+    /*console.log(this.personaService.getPersonas());*/
+    this.personaService.getPersonas().subscribe(res => {
+      this.personas = res;
+      console.log(res);
+    });
+  }
 }
